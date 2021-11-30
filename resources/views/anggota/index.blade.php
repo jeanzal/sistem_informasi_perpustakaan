@@ -14,7 +14,7 @@
 <div class="row">
 
   <div class="col-lg-2">
-    <a href="{{ route('anggota.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Anggota</a>
+    <a href="{{ route('anggota.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Anggota</a>
   </div>
     <div class="col-lg-12">
                   @if (Session::has('message'))
@@ -33,21 +33,13 @@
                     <table class="table table-striped" id="table">
                       <thead>
                         <tr>
-                          <th>
-                            Nama
-                          </th>
-                          <th>
-                            NPM
-                          </th>
-                          <th>
-                            Prodi
-                          </th>
-                          <th>
-                            Jenis Kelamin
-                          </th>
-                          <th>
-                            Action
-                          </th>
+                          <th>Nama</th>
+                          <th>NIM</th>
+                          <th>Jurusan</th>
+                          <th>Jenis Kelamin</th>
+                          <th>No. HP</th>
+                          <th>Alamat</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -57,29 +49,43 @@
                           @if($data->user->gambar)
                             <img src="{{url('images/user', $data->user->gambar)}}" alt="image" style="margin-right: 10px;" />
                           @else
-                            <img src="{{url('images/user/default.png')}}" alt="image" style="margin-right: 10px;" />
+                            <img src="{{url('images/user/logo_ukrim.png')}}" alt="image" style="margin-right: 10px;" />
                           @endif
 
                             {{$data->nama}}
                           </td>
                           <td>
                           <a href="{{route('anggota.show', $data->id)}}"> 
-                            {{$data->npm}}
+                            {{$data->nim}}
                           </a>
                           </td>
 
                           <td>
-                          @if($data->prodi == 'TI')
+                          @if($data->jurusan == 'TI')
                             Teknik Informatika
-                          @elseif($data->prodi == 'SI')
-                            Sistem Informasi
+                          @elseif($data->jurusan == 'TS')
+                            Teknik Sipil
+                          @elseif($data->jurusan == 'EM')
+                            Ekonomi Manajemen
+                          @elseif($data->jurusan == 'FR')
+                            Farmasi
+                          @elseif($data->jurusan == 'MG')
+                            Musik Gereja
+                          @elseif($data->jurusan == 'TKK')
+                            Teologi Konseling Kristen
+                          @elseif($data->jurusan == 'PAK')
+                            Pendidikan Agama Kristen
+                          @elseif($data->jurusan == 'AK')
+                            Akuntansi
                           @else
-                            Kesehatan Masyarakat
+                            Fisika
                           @endif
                           </td>
                           <td>
                             {{$data->jk === "L" ? "Laki - Laki" : "Perempuan"}}
                           </td>
+                          <td>{{$data->no_hp}}</td>
+                          <td>{{$data->alamat}}</td>
                           <td>
                            <div class="btn-group dropdown">
                           <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -90,7 +96,7 @@
                             <form action="{{ route('anggota.destroy', $data->id) }}" class="pull-left"  method="post">
                             {{ csrf_field() }}
                             {{ method_field('delete') }}
-                            <button class="dropdown-item" onclick="return confirm('Anda yakin ingin menghapus data ini?')"> Delete
+                            <button class="dropdown-item" onclick="return confirm('Anda yakin ingin menghapus data ini?')"> Hapus
                             </button>
                           </form>
                            

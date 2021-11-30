@@ -49,7 +49,7 @@ var check = function() {
                       <h4 class="card-title">Detail <b>{{$data->username}}</b></h4>
                       
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="name" class="col-md-4 control-label">Nama</label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ $data->name }}" required readonly>
                                 @if ($errors->has('name'))
@@ -72,7 +72,7 @@ var check = function() {
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">Email</label>
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ $data->email }}" required readonly>
                                 @if ($errors->has('email'))
@@ -100,7 +100,7 @@ var check = function() {
                             </div>
                         </div>
                         @endif
-                        <a href="{{route('user.index')}}" class="btn btn-light pull-right">Back</a>
+                        <a href="{{route('user.index')}}" class="btn btn-danger btn-sm pull-right">Kembali</a>
                     </div>
                   </div>
                 </div>

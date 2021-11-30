@@ -39,7 +39,7 @@ $(document).ready(function() {
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('npm') ? ' has-error' : '' }}">
-                            <label for="npm" class="col-md-4 control-label">NPM</label>
+                            <label for="npm" class="col-md-4 control-label">NIM</label>
                             <div class="col-md-6">
                                 <input id="npm" type="number" class="form-control" name="npm" value="{{ $data->npm }}" maxlength="8" readonly>
                                 @if ($errors->has('npm'))
@@ -49,30 +49,6 @@ $(document).ready(function() {
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('tempat_lahir') ? ' has-error' : '' }}">
-                            <label for="tempat_lahir" class="col-md-4 control-label">Tempat Lahir</label>
-                            <div class="col-md-6">
-                                <input id="tempat_lahir" type="text" class="form-control" name="tempat_lahir" value="{{ $data->tempat_lahir }}" readonly>
-                                @if ($errors->has('tempat_lahir'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('tempat_lahir') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('tgl_lahir') ? ' has-error' : '' }}">
-                            <label for="tgl_lahir" class="col-md-4 control-label">Tanggal Lahir</label>
-                            <div class="col-md-6">
-                                <input id="tgl_lahir" type="text" class="form-control" name="tgl_lahir" value="{{ date('d F Y', strtotime($data->tgl_lahir)) }}" readonly>
-                                @if ($errors->has('tgl_lahir'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('tgl_lahir') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('level') ? ' has-error' : '' }}">
                             <label for="level" class="col-md-4 control-label">Jenis Kelamin</label>
                             <div class="col-md-6">
@@ -85,13 +61,20 @@ $(document).ready(function() {
                         </div>
 
                         <div class="form-group{{ $errors->has('prodi') ? ' has-error' : '' }}">
-                            <label for="prodi" class="col-md-4 control-label">Prodi</label>
+                            <label for="prodi" class="col-md-4 control-label">Jurusan</label>
                             <div class="col-md-6">
                             <select class="form-control" name="prodi" required="" disabled="">
                                 <option value=""></option>
                                 <option value="TI" {{$data->prodi === "TI" ? "selected" : ""}} >Teknik Informatika</option>
-                                <option value="SI" {{$data->prodi === "SI" ? "selected" : ""}} >Sistem Informasi</option>
-                                <option value="KM" {{$data->prodi === "KM" ? "selected" : ""}} >Kesehatan Masyarakat</option>
+                                <option value="TS" {{$data->prodi === "TS" ? "selected" : ""}}>Teknik Sipil</option>
+                                <option value="EM" {{$data->prodi === "EM" ? "selected" : ""}}>Ekonomi Manajemen</option>
+                                <option value="FR" {{$data->prodi === "FR" ? "selected" : ""}}>Farmasi</option>
+                                <option value="MG" {{$data->prodi === "MG" ? "selected" : ""}}>Musik Gereja</option>
+                                <option value="TKK" {{$data->prodi === "TKK" ? "selected" : ""}}>Teologi Konseling Kristen</option>
+                                <option value="PAK" {{$data->prodi === "PAK" ? "selected" : ""}}>Pendidikan Agama Kristen</option>
+                                <option value="AK" {{$data->prodi === "AK" ? "selected" : ""}}>Akuntansi</option>
+                                <option value="FIS" {{$data->prodi === "FIS" ? "selected" : ""}}>Fisika</option>
+                                <option value=""></option>
                             </select>
                             </div>
                         </div>
@@ -102,7 +85,7 @@ $(document).ready(function() {
                             <input id="tgl_lahir" type="text" class="form-control" name="tgl_lahir" value="{{ $data->user->username }}" readonly="">
                             </div>
                         </div>
-                        <a href="{{route('anggota.index')}}" class="btn btn-light pull-right">Back</a>
+                        <a href="{{route('anggota.index')}}" class="btn btn-light btn-sm pull-right">Kembali</a>
                     </div>
                   </div>
                 </div>

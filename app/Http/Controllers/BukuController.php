@@ -54,7 +54,7 @@ class BukuController extends Controller
 
     public function format()
     {
-        $data = [['judul' => null, 'isbn' => null, 'pengarang' => null, 'penerbit' => null, 'tahun_terbit' => null, 'jumlah_buku' => null, 'deskripsi' => null, 'lokasi' => 'rak1/rak2/rak3']];
+        $data = [['judul_buku' => null, 'nama_penulis' => null, 'tahun_terbit' => null, 'jumlah_buku' => null, ]];
             $fileName = 'format-buku';
             
 
@@ -82,15 +82,11 @@ class BukuController extends Controller
             if (!empty($a) && $a->count()) {
                 foreach ($a as $key => $value) {
                     $insert[] = [
-                            'judul' => $value->judul, 
-                            'isbn' => $value->isbn, 
-                            'pengarang' => $value->pengarang, 
-                            'penerbit' => $value->penerbit,
+                            'judul_buku' => $value->judul_buku, 
+                            'nama_penulis' => $value->nama_penulis, 
                             'tahun_terbit' => $value->tahun_terbit, 
                             'jumlah_buku' => $value->jumlah_buku, 
-                            'deskripsi' => $value->deskripsi, 
-                            'lokasi' => $value->lokasi,
-                            'cover' => NULL];
+                            'gambar_buku' => NULL];
 
                     Buku::create($insert[$key]);
                         
@@ -111,31 +107,26 @@ class BukuController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'judul' => 'required|string|max:255',
-            'isbn' => 'required|string'
+            'judul_buku' => 'required|string|max:255'
         ]);
 
-        if($request->file('cover')) {
-            $file = $request->file('cover');
+        if($request->file('gambar_buku')) {
+            $file = $request->file('gambar_buku');
             $dt = Carbon::now();
             $acak  = $file->getClientOriginalExtension();
             $fileName = rand(11111,99999).'-'.$dt->format('Y-m-d-H-i-s').'.'.$acak; 
-            $request->file('cover')->move("images/buku", $fileName);
-            $cover = $fileName;
+            $request->file('gambar_buku')->move("images/buku", $fileName);
+            $gambar_buku = $fileName;
         } else {
-            $cover = NULL;
+            $gambar_buku = NULL;
         }
 
         Buku::create([
-                'judul' => $request->get('judul'),
-                'isbn' => $request->get('isbn'),
-                'pengarang' => $request->get('pengarang'),
-                'penerbit' => $request->get('penerbit'),
+                'judul_buku' => $request->get('judul_buku'),
+                'nama_penulis' => $request->get('nama_penulis'),
                 'tahun_terbit' => $request->get('tahun_terbit'),
                 'jumlah_buku' => $request->get('jumlah_buku'),
-                'deskripsi' => $request->get('deskripsi'),
-                'lokasi' => $request->get('lokasi'),
-                'cover' => $cover
+                'gambar_buku' => $gambar_buku
             ]);
 
         alert()->success('Berhasil.','Data telah ditambahkan!');
@@ -188,27 +179,23 @@ class BukuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->file('cover')) {
-            $file = $request->file('cover');
+        if($request->file('gambar_buku')) {
+            $file = $request->file('gambar_buku');
             $dt = Carbon::now();
             $acak  = $file->getClientOriginalExtension();
             $fileName = rand(11111,99999).'-'.$dt->format('Y-m-d-H-i-s').'.'.$acak; 
-            $request->file('cover')->move("images/buku", $fileName);
-            $cover = $fileName;
+            $request->file('gambar_buku')->move("images/buku", $fileName);
+            $gambar_buku = $fileName;
         } else {
-            $cover = NULL;
+            $gambar_buku = NULL;
         }
 
         Buku::find($id)->update([
-             'judul' => $request->get('judul'),
-                'isbn' => $request->get('isbn'),
-                'pengarang' => $request->get('pengarang'),
-                'penerbit' => $request->get('penerbit'),
+             'judul_buku' => $request->get('judul_buku'),
+                'nama_penulis' => $request->get('nama_penulis'),
                 'tahun_terbit' => $request->get('tahun_terbit'),
                 'jumlah_buku' => $request->get('jumlah_buku'),
-                'deskripsi' => $request->get('deskripsi'),
-                'lokasi' => $request->get('lokasi'),
-                'cover' => $cover
+                'gambar_buku' => $gambar_buku
                 ]);
 
         alert()->success('Berhasil.','Data telah diubah!');

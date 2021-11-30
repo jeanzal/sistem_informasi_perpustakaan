@@ -23,8 +23,6 @@ $(document).ready(function() {
         $(function () {
             $(".uploads").change(readURL)
             $("#f").submit(function(){
-                // do ajax submit or just classic form submit
-              //  alert("fake subminting")
                 return false
             })
         })
@@ -43,48 +41,26 @@ $(document).ready(function() {
                 <div class="col-12">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Tambah Buku baru</h4>
+                      <h4 class="card-title">Tambah Buku</h4>
                       
-                        <div class="form-group{{ $errors->has('judul') ? ' has-error' : '' }}">
-                            <label for="judul" class="col-md-4 control-label">Judul</label>
+                        <div class="form-group{{ $errors->has('judul_buku') ? ' has-error' : '' }}">
+                            <label for="judul_buku" class="col-md-4 control-label">Judul Buku</label>
                             <div class="col-md-6">
-                                <input id="judul" type="text" class="form-control" name="judul" value="{{ old('judul') }}" required>
-                                @if ($errors->has('judul'))
+                                <input id="judul_buku" type="text" class="form-control" name="judul_buku" value="{{ old('judul_buku') }}" required>
+                                @if ($errors->has('judul_buku'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('judul') }}</strong>
+                                        <strong>{{ $errors->first('judul_buku') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('npm') ? ' has-error' : '' }}">
-                            <label for="isbn" class="col-md-4 control-label">ISBN</label>
+                        <div class="form-group{{ $errors->has('nama_penulis') ? ' has-error' : '' }}">
+                            <label for="nama_penulis" class="col-md-4 control-label">Nama Penulis</label>
                             <div class="col-md-6">
-                                <input id="isbn" type="text" class="form-control" name="isbn" value="{{ old('isbn') }}" required>
-                                @if ($errors->has('isbn'))
+                                <input id="nama_penulis" type="text" class="form-control" name="nama_penulis" value="{{ old('nama_penulis') }}" required>
+                                @if ($errors->has('nama_penulis'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('isbn') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('pengarang') ? ' has-error' : '' }}">
-                            <label for="pengarang" class="col-md-4 control-label">Pengarang</label>
-                            <div class="col-md-6">
-                                <input id="pengarang" type="text" class="form-control" name="pengarang" value="{{ old('pengarang') }}" required>
-                                @if ($errors->has('pengarang'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('pengarang') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('penerbit') ? ' has-error' : '' }}">
-                            <label for="penerbit" class="col-md-4 control-label">Penerbit</label>
-                            <div class="col-md-6">
-                                <input id="penerbit" type="text" class="form-control" name="penerbit" value="{{ old('penerbit') }}" required>
-                                @if ($errors->has('penerbit'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('penerbit') }}</strong>
+                                        <strong>{{ $errors->first('nama_penulis') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -111,45 +87,20 @@ $(document).ready(function() {
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('deskripsi') ? ' has-error' : '' }}">
-                            <label for="deskripsi" class="col-md-4 control-label">Deskripsi</label>
-                            <div class="col-md-12">
-                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{ old('deskripsi') }}" >
-                                @if ($errors->has('deskripsi'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('deskripsi') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('lokasi') ? ' has-error' : '' }}">
-                            <label for="lokasi" class="col-md-4 control-label">Lokasi</label>
-                            <div class="col-md-6">
-                            <select class="form-control" name="lokasi" required="">
-                                <option value=""></option>
-                                <option value="rak1">Rak 1</option>
-                                <option value="rak2">Rak 2</option>
-                                <option value="rak3">Rak 3</option>
-                            </select>
-                            </div>
-                        </div>
-
                         <div class="form-group">
-                            <label for="email" class="col-md-4 control-label">Cover</label>
+                            <label for="email" class="col-md-4 control-label">Gambar Buku</label>
                             <div class="col-md-6">
                                 <img width="200" height="200" />
-                                <input type="file" class="uploads form-control" style="margin-top: 20px;" name="cover">
+                                <input type="file" class="uploads form-control" style="margin-top: 20px;" name="gambar_buku">
                             </div>
                         </div>
-
-                        <button type="submit" class="btn btn-primary" id="submit">
-                                    Submit
+                        <button type="submit" class="btn btn-sm btn-primary" id="submit">
+                                    Tambah
                         </button>
-                        <button type="reset" class="btn btn-danger">
+                        <button type="reset" class="btn btn-sm btn-danger">
                                     Reset
                         </button>
-                        <a href="{{route('buku.index')}}" class="btn btn-light pull-right">Back</a>
+                        <a href="{{route('buku.index')}}" class="btn btn-light pull-right">Kembali</a>
                     </div>
                   </div>
                 </div>

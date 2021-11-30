@@ -15,7 +15,7 @@
 <div class="row">
 
   <div class="col-lg-2">
-    <a href="{{ route('transaksi.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Transaksi</a>
+    <a href="{{ route('transaksi.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Transaksi</a>
   </div>
     <div class="col-lg-12">
                   @if (Session::has('message'))
@@ -34,31 +34,27 @@
                     <table class="table table-striped" id="table">
                       <thead>
                         <tr>
-                          <th>
-                            Kode
-                          </th>
-                          <th>
-                            Buku
-                          </th>
-                          <th>
-                            Peminjam
-                          </th>
-                          <th>
-                            Tgl Pinjam
-                          </th>
-                          <th>
-                            Tgl Kembali
-                          </th>
-                          <th>
-                            Status
-                          </th>
-                          <th>
-                            Action
-                          </th>
+                          <th>Kode</th>
+                          <th>Judul Buku</th>
+                          <th>Nama Peminjam</th>
+                          <th>Tgl Peminjaman</th>
+                          <th>Tgl Pengembalian</th>
+                          <th>Denda</th>
+                          <th>Status</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
+                        
                       @foreach($datas as $data)
+                         @php
+                          $pin = $data->tgl_pinjam;
+                          $kem = $data->tgl_kembali;
+                          $htg1 = new DateTime($pin);
+                          $htg2 = new DateTime($kem);
+                          $interval = date_diff($htg1,$htg2);
+                          $days = $interval->format('%a');
+                        @endphp
                         <tr>
                           <td class="py-1">
                           <a href="{{route('transaksi.show', $data->id)}}"> 
@@ -67,7 +63,7 @@
                           </td>
                           <td>
                           
-                            {{$data->buku->judul}}
+                            {{$data->buku->judul_buku}}
                           
                           </td>
 
@@ -81,12 +77,31 @@
                             {{date('d/m/y', strtotime($data->tgl_kembali))}}
                           </td>
                           <td>
+                          @php
+                            if($data->status == 'kembali'){
+                              if($days > 7){
+                                $perdenda = 1000;
+                                $lama = $days - 30;
+                                $denda = $lama - 7;
+                                $bayar_denda = $denda * $perdenda;
+                                echo('Terlambat ' . $denda . ' hari = Rp ' . $bayar_denda);
+                              }else{
+                                echo 'Tidak ada Denda';
+                              }
+                            }else{
+                              echo 'Belum dikembalikan';
+                            }
+                            
+                          @endphp
+                          </td>
+                          <td>
                           @if($data->status == 'pinjam')
                             <label class="badge badge-warning">Pinjam</label>
                           @else
                             <label class="badge badge-success">Kembali</label>
                           @endif
                           </td>
+                          
                           <td>
                           @if(Auth::user()->level == 'admin')
                           <div class="btn-group dropdown">

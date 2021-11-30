@@ -63,46 +63,20 @@
  <table id="pseudo-demo">
                       <thead>
                         <tr>
-                          <th>
-                            Judul
-                          </th>
-                          <th>
-                            ISBN
-                          </th>
-                          <th>
-                            Pengarang
-                          </th>
-                          <th>
-                            Penerbit
-                          </th>
-                          <th>
-                            Tahun
-                          </th>
-                          <th>
-                            Stok
-                          </th>
-                          <th>
-                            Rak
-                          </th>
+                          <td>Judul Buku</td>
+                          <td>Nama Penulis</td>
+                          <td>Tahun Terbit</td>
+                          <td>Jumlah Buku</td>
                         </tr>
                       </thead>
                       <tbody>
                       @foreach($datas as $data)
                         <tr>
                           <td class="py-1">
-                            {{$data->judul}}
+                            {{$data->judul_buku}}
                           </td>
-                          <td>
-                          
-                            {{$data->isbn}}
-                          
-                          </td>
-
                           <td>
                             {{$data->pengarang}}
-                          </td>
-                          <td>
-                            {{$data->penerbit}}
                           </td>
                           <td>
                             {{$data->tahun_terbit}}
@@ -110,10 +84,6 @@
                           <td>
                             {{$data->jumlah_buku}}
                           </td>
-                          <td>
-                            {{$data->lokasi}}
-                          </td>
-                          
                         </tr>
                       @endforeach
                       </tbody>

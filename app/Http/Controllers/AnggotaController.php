@@ -64,7 +64,7 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        $count = Anggota::where('npm',$request->input('npm'))->count();
+        $count = Anggota::where('nim',$request->input('nim'))->count();
 
         if($count>0){
             Session::flash('message', 'Already exist!');
@@ -74,7 +74,7 @@ class AnggotaController extends Controller
 
         $this->validate($request, [
             'nama' => 'required|string|max:255',
-            'npm' => 'required|string|max:20|unique:anggota'
+            'nim' => 'required|string|max:20|unique:anggota'
         ]);
 
         Anggota::create($request->all());

@@ -20,14 +20,14 @@
                       <i class="mdi mdi-poll-box text-danger icon-lg"></i>
                     </div>
                     <div class="float-right">
-                      <p class="mb-0 text-right">Transaksi</p>
+                      <p class="mb-0 text-right">Data Transaksi</p>
                       <div class="fluid-container">
                         <h3 class="font-weight-medium text-right mb-0">{{$transaksi->count()}}</h3>
                       </div>
                     </div>
                   </div>
                   <p class="text-muted mt-3 mb-0">
-                    <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> Total seluruh transaksi
+                    <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> Total Data Transaksi
                   </p>
                 </div>
               </div>
@@ -40,14 +40,14 @@
                       <i class="mdi mdi-receipt text-warning icon-lg"></i>
                     </div>
                     <div class="float-right">
-                      <p class="mb-0 text-right">Sedang Pinjam</p>
+                      <p class="mb-0 text-right">Data Peminjaman</p>
                       <div class="fluid-container">
                         <h3 class="font-weight-medium text-right mb-0">{{$transaksi->where('status', 'pinjam')->count()}}</h3>
                       </div>
                     </div>
                   </div>
                   <p class="text-muted mt-3 mb-0">
-                    <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> sedang dipinjam
+                    <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> Total Data Peminjaman
                   </p>
                 </div>
               </div>
@@ -60,14 +60,14 @@
                       <i class="mdi mdi-book text-success icon-lg" style="width: 40px;height: 40px;"></i>
                     </div>
                     <div class="float-right">
-                      <p class="mb-0 text-right">Buku</p>
+                      <p class="mb-0 text-right">Data Buku</p>
                       <div class="fluid-container">
                         <h3 class="font-weight-medium text-right mb-0">{{$buku->count()}}</h3>
                       </div>
                     </div>
                   </div>
                   <p class="text-muted mt-3 mb-0">
-                    <i class="mdi mdi-book mr-1" aria-hidden="true"></i> Total judul buku
+                    <i class="mdi mdi-book mr-1" aria-hidden="true"></i> Total Data Buku
                   </p>
                 </div>
               </div>
@@ -80,14 +80,14 @@
                       <i class="mdi mdi-account-location text-info icon-lg"></i>
                     </div>
                     <div class="float-right">
-                      <p class="mb-0 text-right">Anggota</p>
+                      <p class="mb-0 text-right">Data Anggota</p>
                       <div class="fluid-container">
                         <h3 class="font-weight-medium text-right mb-0">{{$anggota->count()}}</h3>
                       </div>
                     </div>
                   </div>
                   <p class="text-muted mt-3 mb-0">
-                    <i class="mdi mdi-account mr-1" aria-hidden="true"></i> Total seluruh anggota
+                    <i class="mdi mdi-account mr-1" aria-hidden="true"></i> Total Data Anggota
                   </p>
                 </div>
               </div>
@@ -98,26 +98,26 @@
               <div class="card">
 
                 <div class="card-body">
-                  <h4 class="card-title">Data Transaksi sedang pinjam</h4>
+                  <h4 class="card-title">Data Transaksi Peminjaman</h4>
                   
                   <div class="table-responsive">
                     <table class="table table-striped" id="table">
                       <thead>
                         <tr>
                           <th>
-                            Kode
+                            ID
                           </th>
                           <th>
-                            Buku
+                            Judul Buku
                           </th>
                           <th>
-                            Peminjam
+                            Nama Peminjam
                           </th>
                           <th>
-                            Tgl Pinjam
+                            Tgl Peminjaman
                           </th>
                           <th>
-                            Tgl Kembali
+                            Tgl Pengembalian
                           </th>
                           <th>
                             Status
@@ -137,7 +137,7 @@
                           </td>
                           <td>
                           
-                            {{$data->buku->judul}}
+                            {{$data->buku->judul_buku}}
                           
                           </td>
 
@@ -152,16 +152,16 @@
                           </td>
                           <td>
                           @if($data->status == 'pinjam')
-                            <label class="badge badge-warning">Pinjam</label>
+                            <label class="badge badge-warning">Sedang Dipinjam</label>
                           @else
-                            <label class="badge badge-success">Kembali</label>
+                            <label class="badge badge-success">Sudah Kembali</label>
                           @endif
                           </td>
                           <td>
                           <form action="{{ route('transaksi.update', $data->id) }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('put') }}
-                            <button class="btn btn-info btn-sm" onclick="return confirm('Anda yakin data ini sudah kembali?')">Sudah Kembali
+                            <button class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin data ini sudah kembali?')">Dikembalikan ?
                             </button>
                           </form>
                           

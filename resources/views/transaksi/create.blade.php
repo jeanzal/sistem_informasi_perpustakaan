@@ -34,7 +34,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Tambah Transaksi baru</h4>
+                      <h4 class="card-title">Tambah Transaksi</h4>
                     
                         <div class="form-group{{ $errors->has('kode_transaksi') ? ' has-error' : '' }}">
                             <label for="kode_transaksi" class="col-md-4 control-label">Kode Transaksi</label>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                          <div class="form-group{{ $errors->has('tgl_pinjam') ? ' has-error' : '' }}">
-                            <label for="tgl_pinjam" class="col-md-4 control-label">Tanggal Pinjam</label>
+                            <label for="tgl_pinjam" class="col-md-4 control-label">Tanggal Peminjaman</label>
                             <div class="col-md-3">
                                 <input id="tgl_pinjam" type="date" class="form-control" name="tgl_pinjam" value="{{ date('Y-m-d', strtotime(Carbon\Carbon::today()->toDateString())) }}" required @if(Auth::user()->level == 'user') readonly @endif>
                                 @if ($errors->has('tgl_pinjam'))
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                          <div class="form-group{{ $errors->has('tgl_kembali') ? ' has-error' : '' }}">
-                            <label for="tgl_kembali" class="col-md-4 control-label">Tanggal Kembali</label>
+                            <label for="tgl_kembali" class="col-md-4 control-label">Tanggal Pengembalian</label>
                             <div class="col-md-3">
                                 <input id="tgl_kembali" type="date"  class="form-control" name="tgl_kembali" value="{{ date('Y-m-d', strtotime(Carbon\Carbon::today()->addDays(5)->toDateString())) }}" required="" @if(Auth::user()->level == 'user') readonly @endif>
                                 @if ($errors->has('tgl_kembali'))
@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('buku_id') ? ' has-error' : '' }}">
-                            <label for="buku_id" class="col-md-4 control-label">Buku</label>
+                            <label for="buku_id" class="col-md-4 control-label">Judul Buku</label>
                             <div class="col-md-6">
                                 <div class="input-group">
                                 <input id="buku_judul" type="text" class="form-control" readonly="" required>
@@ -92,13 +92,13 @@
 
                         @if(Auth::user()->level == 'admin')
                         <div class="form-group{{ $errors->has('anggota_id') ? ' has-error' : '' }}">
-                            <label for="anggota_id" class="col-md-4 control-label">Anggota</label>
+                            <label for="anggota_id" class="col-md-4 control-label">Nama Peminjam</label>
                             <div class="col-md-6">
                                 <div class="input-group">
                                 <input id="anggota_nama" type="text" class="form-control" readonly="" required>
                                 <input id="anggota_id" type="hidden" name="anggota_id" value="{{ old('anggota_id') }}" required readonly="">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-warning btn-secondary" data-toggle="modal" data-target="#myModal2"><b>Cari Anggota</b> <span class="fa fa-search"></span></button>
+                                    <button type="button" class="btn btn-warning btn-secondary" data-toggle="modal" data-target="#myModal2"><b>Cari Peminjam</b> <span class="fa fa-search"></span></button>
                                 </span>
                                 </div>
                                 @if ($errors->has('anggota_id'))
@@ -125,26 +125,13 @@
                             </div>
                         </div>
                         @endif
-
-                        <div class="form-group{{ $errors->has('ket') ? ' has-error' : '' }}">
-                            <label for="ket" class="col-md-4 control-label">Keterangan</label>
-                            <div class="col-md-6">
-                                <input id="ket" type="text" class="form-control" name="ket" value="{{ old('ket') }}">
-                                @if ($errors->has('ket'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('ket') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary" id="submit">
-                                    Submit
+                        <button type="submit" class="btn btn-primary btn-sm" id="submit">
+                                    Tambah
                         </button>
-                        <button type="reset" class="btn btn-danger">
+                        <button type="reset" class="btn btn-danger btn-sm">
                                     Reset
                         </button>
-                        <a href="{{route('transaksi.index')}}" class="btn btn-light pull-right">Back</a>
+                        <a href="{{route('transaksi.index')}}" class="btn btn-light btn-sm pull-right">Kembali</a>
                     </div>
                   </div>
                 </div>
@@ -169,24 +156,22 @@
                         <table id="lookup" class="table table-bordered table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th>Judul</th>
-                                    <th>ISBN</th>
-                                    <th>Pengarang</th>
-                                    <th>Tahun</th>
-                                    <th>Stok</th>
+                                    <th>Judul Buku</th>
+                                    <th>Nama Penulis</th>
+                                    <th>Tahun Terbit</th>
+                                    <th>Jumlah Buku</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($bukus as $data)
-                                <tr class="pilih" data-buku_id="<?php echo $data->id; ?>" data-buku_judul="<?php echo $data->judul; ?>" >
-                                    <td>@if($data->cover)
-                            <img src="{{url('images/buku/'. $data->cover)}}" alt="image" style="margin-right: 10px;" />
+                                <tr class="pilih" data-buku_id="<?php echo $data->id; ?>" data-buku_judul="<?php echo $data->judul_buku; ?>" >
+                                    <td>@if($data->gambar_buku)
+                            <img src="{{url('images/buku/'. $data->gambar_buku)}}" alt="image" style="margin-right: 10px;" />
                           @else
                             <img src="{{url('images/buku/default.png')}}" alt="image" style="margin-right: 10px;" />
                           @endif
-                          {{$data->judul}}</td>
-                                    <td>{{$data->isbn}}</td>
-                                    <td>{{$data->pengarang}}</td>
+                          {{$data->judul_buku}}</td>
+                                    <td>{{$data->nama_penulis}}</td>
                                     <td>{{$data->tahun_terbit}}</td>
                                     <td>{{$data->jumlah_buku}}</td>
                                 </tr>
@@ -204,7 +189,7 @@
   <div class="modal-dialog modal-lg" role="document" >
     <div class="modal-content" style="background: #fff;">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cari Anggota</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cari Peminjam</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -213,18 +198,12 @@
                         <table id="lookup" class="table table-bordered table-hover table-striped">
                             <thead>
                         <tr>
-                          <th>
-                            Nama
-                          </th>
-                          <th>
-                            NPM
-                          </th>
-                          <th>
-                            Prodi
-                          </th>
-                          <th>
-                            Jenis Kelamin
-                          </th>
+                          <th>Nama Peminjam</th>
+                          <th>NIM</th>
+                          <th>Jurusan</th>
+                          <th>Jenis Kelamin</th>
+                          <th>No. Handphone</th>
+                          <th>Alamat</th>
                         </tr>
                       </thead>
                             <tbody>
@@ -234,27 +213,40 @@
                           @if($data->user->gambar)
                             <img src="{{url('images/user', $data->user->gambar)}}" alt="image" style="margin-right: 10px;" />
                           @else
-                            <img src="{{url('images/user/default.png')}}" alt="image" style="margin-right: 10px;" />
+                            <img src="{{url('images/user/logo_ukrim.png')}}" alt="image" style="margin-right: 10px;" />
                           @endif
-
                             {{$data->nama}}
                           </td>
                           <td>
-                            {{$data->npm}}
+                            {{$data->nim}}
                           </td>
 
                           <td>
-                          @if($data->prodi == 'TI')
+                          @if($data->jurusan == 'TI')
                             Teknik Informatika
-                          @elseif($data->prodi == 'SI')
-                            Sistem Informasi
+                          @elseif($data->jurusan == 'TS')
+                            Teknik Sipil
+                          @elseif($data->jurusan == 'EM')
+                            Ekonomi Manajemen
+                          @elseif($data->jurusan == 'FR')
+                            Farmasi
+                          @elseif($data->jurusan == 'MG')
+                            Musik Gereja
+                          @elseif($data->jurusan == 'TKK')
+                            Teologi Konseling Kristen
+                          @elseif($data->jurusan == 'PAK')
+                            Pendidikan Agama Kristen
+                          @elseif($data->jurusan == 'AK')
+                            Akuntansi
                           @else
-                            Kesehatan Masyarakat
+                            Fisika
                           @endif
                           </td>
                           <td>
                             {{$data->jk === "L" ? "Laki - Laki" : "Perempuan"}}
                           </td>
+                          <td>{{$data->no_hp}}</td>
+                          <td>{{$data->alamat}}</td>
                         </tr>
                                 @endforeach
                             </tbody>

@@ -96,7 +96,7 @@ class TransaksiController extends Controller
                 'tgl_kembali' => $request->get('tgl_kembali'),
                 'buku_id' => $request->get('buku_id'),
                 'anggota_id' => $request->get('anggota_id'),
-                'ket' => $request->get('ket'),
+                'denda' => $request->get('denda'),
                 'status' => 'pinjam'
             ]);
 

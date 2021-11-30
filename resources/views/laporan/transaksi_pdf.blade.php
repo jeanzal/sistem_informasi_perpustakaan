@@ -86,37 +86,33 @@
 <body>
 <h1 class="center">LAPORAN DATA TRANSAKSI</h1>
  <table id="pseudo-demo">
-                      <thead>
+                      
                         <tr>
-                          <th>
-                            Kode
-                          </th>
-                          <th>
-                            Buku
-                          </th>
-                          <th>
-                            Peminjam
-                          </th>
-                          <th>
-                            Tgl Pinjam
-                          </th>
-                          <th>
-                            Tgl Kembali
-                          </th>
-                          <th>
-                            Status
-                          </th>
+                          <td>Kode</td>
+                          <td>Judul Buku</td>
+                          <td>Nama Peminjam</td>
+                          <td>Tgl Peminjaman</td>
+                          <td>Tgl Pengembalian</td>
+                          <td>Denda</td>
+                          <td>Status</td>
                         </tr>
-                      </thead>
-                      <tbody>
+                        
                       @foreach($datas as $data)
+                        @php
+                          $pin = $data->tgl_pinjam;
+                          $kem = $data->tgl_kembali;
+                          $htg1 = new DateTime($pin);
+                          $htg2 = new DateTime($kem);
+                          $interval = date_diff($htg1,$htg2);
+                          $days = $interval->format('%a');
+                        @endphp
                        <tr>
                           <td class="py-1">
                             {{$data->kode_transaksi}}
                           </td>
                           <td>
                           
-                            {{$data->buku->judul}}
+                            {{$data->buku->judul_buku}}
                           
                           </td>
 
@@ -130,15 +126,32 @@
                             {{date('d/m/y', strtotime($data->tgl_kembali))}}
                           </td>
                           <td>
+                          @php
+                            if($data->status == 'kembali'){
+                              if($days > 7){
+                                $perdenda = 1000;
+                                $lama = $days - 30;
+                                $denda = $lama - 7;
+                                $bayar_denda = $denda * $perdenda;
+                                echo('Terlambat ' . $denda . ' hari = Rp ' . $bayar_denda);
+                              }else{
+                                echo 'Tidak ada Denda';
+                              }
+                            }else{
+                              echo 'Belum dikembalikan';
+                            }
+                            
+                          @endphp
+                          </td>
+                          <td>
                           @if($data->status == 'pinjam')
-                            <label class="badge badge-warning">Pinjam</label>
+                            <label class="badge badge-warning">Sedang Dipinjam</label>
                           @else
-                            <label class="badge badge-success">Kembali</label>
+                            <label class="badge badge-success">Sudah Dikembalikan</label>
                           @endif
                           </td>
                         </tr>
                       @endforeach
-                      </tbody>
                     </table>
 </body>
 </html>

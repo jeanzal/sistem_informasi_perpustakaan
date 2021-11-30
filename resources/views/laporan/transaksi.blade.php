@@ -26,8 +26,8 @@
                           </button>
                           <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 30px, 0px);">
                             <a class="dropdown-item" href="{{url('laporan/trs/pdf')}}"> Semua Transaksi </a>
-                            <a class="dropdown-item" href="{{url('laporan/trs/pdf?status=pinjam')}}"> Pinjam </a>
-                            <a class="dropdown-item" href="{{url('laporan/trs/pdf?status=kembali')}}"> Kembali </a>
+                            <a class="dropdown-item" href="{{url('laporan/trs/pdf?status=pinjam')}}"> Data Peminjaman </a>
+                            <a class="dropdown-item" href="{{url('laporan/trs/pdf?status=kembali')}}"> Data Pengembalian </a>
                           </div>
                         </div>
                         <div class="btn-group dropdown">
@@ -36,8 +36,8 @@
                           </button>
                           <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 30px, 0px);">
                             <a class="dropdown-item" href="{{url('laporan/trs/excel')}}"> Semua Transaksi </a>
-                            <a class="dropdown-item" href="{{url('laporan/trs/excel?status=pinjam')}}"> Pinjam </a>
-                            <a class="dropdown-item" href="{{url('laporan/trs/excel?status=kembali')}}"> Kembali </a>
+                            <a class="dropdown-item" href="{{url('laporan/trs/excel?status=pinjam')}}"> Data Peminjaman </a>
+                            <a class="dropdown-item" href="{{url('laporan/trs/excel?status=kembali')}}"> Data Pengembalian   </a>
                           </div>
                         </div>
                 </div>

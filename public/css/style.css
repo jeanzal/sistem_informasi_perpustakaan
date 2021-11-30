@@ -14114,7 +14114,7 @@ input:focus {
 /* Navbar */
 .navbar.default-layout {
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(120deg, #00e4d0, #5983e8);
+  background: linear-gradient(120deg, #646464, #000000);
   transition: background 0.25s ease;
   -webkit-transition: background 0.25s ease;
   -moz-transition: background 0.25s ease;
@@ -14464,11 +14464,18 @@ html {
       width: 100%; } }
 
 .content-wrapper {
-  background: #f2f8f9;
+  background: #8f0c0c;
   padding: 1.5rem 1.7rem;
   width: 100%;
   -webkit-flex-grow: 1;
   flex-grow: 1; }
+
+  .content-wrapper2 {
+    background: whitesmoke;
+    padding: 1.5rem 1.7rem;
+    width: 100%;
+    -webkit-flex-grow: 1;
+    flex-grow: 1; }
 
 .container-scroller {
   overflow: hidden; }
@@ -16360,7 +16367,7 @@ ul {
   background-size: cover; }
 
 .auth.theme-one .auto-form-wrapper {
-  background: #ffffff;
+  background: #d7d0d0;
   padding: 40px 40px 10px;
   border-radius: 4px;
   box-shadow: 0 -25px 37.7px 11.3px rgba(8, 143, 220, 0.07); }

@@ -14,7 +14,7 @@
 <div class="row">
 
   <div class="col-lg-2">
-    <a href="{{ route('user.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah User</a>
+    <a href="{{ route('user.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah User</a>
   </div>
     <div class="col-lg-12">
                   @if (Session::has('message'))
@@ -34,7 +34,7 @@
                       <thead>
                         <tr>
                           <th>
-                            Name
+                            Nama
                           </th>
                           <th>
                             Username
@@ -43,7 +43,7 @@
                             Email
                           </th>
                           <th>
-                            Created At
+                            Tanggal Dibuat
                           </th>
                           <th>
                             Action
@@ -57,7 +57,7 @@
                           @if($data->gambar)
                             <img src="{{url('images/user', $data->gambar)}}" alt="image" style="margin-right: 10px;" />
                           @else
-                            <img src="{{url('images/user/default.png')}}" alt="image" style="margin-right: 10px;" />
+                            <img src="{{url('images/user/logo_ukrim.png')}}" alt="image" style="margin-right: 10px;" />
 
                           @endif
 

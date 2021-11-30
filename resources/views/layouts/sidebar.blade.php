@@ -5,7 +5,7 @@
                 <div class="profile-image">
                 @if(Auth::user()->gambar == '')
 
-                  <img src="{{asset('images/user/default.png')}}" alt="profile image">
+                  <img src="{{asset('images/user/logo_ukrim.png')}}" alt="profile image">
                 @else
 
                   <img src="{{asset('images/user/'. Auth::user()->gambar)}}" alt="profile image">
@@ -31,7 +31,7 @@
           <li class="nav-item {{ setActive(['anggota*', 'buku*', 'user*']) }}">
             <a class="nav-link " data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-content-copy"></i>
-              <span class="menu-title">Master Data</span>
+              <span class="menu-title">Data</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse {{ setShow(['anggota*', 'buku*', 'user*']) }}" id="ui-basic">

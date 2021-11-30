@@ -35,41 +35,17 @@ $(document).ready(function() {
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('npm') ? ' has-error' : '' }}">
-                            <label for="npm" class="col-md-4 control-label">NPM</label>
+                        <div class="form-group{{ $errors->has('nim') ? ' has-error' : '' }}">
+                            <label for="nim" class="col-md-4 control-label">NIM</label>
                             <div class="col-md-6">
-                                <input id="npm" type="number" class="form-control" name="npm" value="{{ $data->npm }}" maxlength="8" required>
-                                @if ($errors->has('npm'))
+                                <input id="nim" type="number" class="form-control" name="nim" value="{{ $data->nim }}" maxlength="8" required>
+                                @if ($errors->has('nim'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('npm') }}</strong>
+                                        <strong>{{ $errors->first('nim') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('tempat_lahir') ? ' has-error' : '' }}">
-                            <label for="tempat_lahir" class="col-md-4 control-label">Tempat Lahir</label>
-                            <div class="col-md-6">
-                                <input id="tempat_lahir" type="text" class="form-control" name="tempat_lahir" value="{{ $data->tempat_lahir }}" required>
-                                @if ($errors->has('tempat_lahir'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('tempat_lahir') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('tgl_lahir') ? ' has-error' : '' }}">
-                            <label for="tgl_lahir" class="col-md-4 control-label">Tanggal Lahir</label>
-                            <div class="col-md-6">
-                                <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir" value="{{ $data->tgl_lahir }}" required>
-                                @if ($errors->has('tgl_lahir'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('tgl_lahir') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('level') ? ' has-error' : '' }}">
                             <label for="level" class="col-md-4 control-label">Jenis Kelamin</label>
                             <div class="col-md-6">
@@ -81,19 +57,47 @@ $(document).ready(function() {
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('prodi') ? ' has-error' : '' }}">
-                            <label for="prodi" class="col-md-4 control-label">Prodi</label>
+                        <div class="form-group{{ $errors->has('jurusan') ? ' has-error' : '' }}">
+                            <label for="jurusan" class="col-md-4 control-label">Jurusan</label>
                             <div class="col-md-6">
-                            <select class="form-control" name="prodi" required="">
+                            <select class="form-control" name="jurusan" required="">
                                 <option value=""></option>
-                                <option value="TI" {{$data->prodi === "TI" ? "selected" : ""}} >Teknik Informatika</option>
-                                <option value="SI" {{$data->prodi === "SI" ? "selected" : ""}} >Sistem Informasi</option>
-                                <option value="KM" {{$data->prodi === "KM" ? "selected" : ""}} >Kesehatan Masyarakat</option>
+                                <option value="TI" {{$data->jurusan === "TI" ? "selected" : ""}} >Teknik Informatika</option>
+                                <option value="TS" {{$data->jurusan === "TS" ? "selected" : ""}}>Teknik Sipil</option>
+                                <option value="EM" {{$data->jurusan === "EM" ? "selected" : ""}}>Ekonomi Manajemen</option>
+                                <option value="FR" {{$data->jurusan === "FR" ? "selected" : ""}}>Farmasi</option>
+                                <option value="MG" {{$data->jurusan === "MG" ? "selected" : ""}}>Musik Gereja</option>
+                                <option value="TKK" {{$data->jurusan === "TKK" ? "selected" : ""}}>Teologi Konseling Kristen</option>
+                                <option value="PAK" {{$data->jurusan === "PAK" ? "selected" : ""}}>Pendidikan Agama Kristen</option>
+                                <option value="AK" {{$data->jurusan === "AK" ? "selected" : ""}}>Akuntansi</option>
+                                <option value="FIS" {{$data->jurusan === "FIS" ? "selected" : ""}}>Fisika</option>
                             </select>
                             </div>
                         </div>
+                        <div class="form-group{{ $errors->has('no_hp') ? ' has-error' : '' }}">
+                            <label for="no_hp" class="col-md-4 control-label">No. Handphone</label>
+                            <div class="col-md-6">
+                                <input id="no_hp" type="number" class="form-control" name="no_hp" value="{{ $data->no_hp }}" maxlength="8" required>
+                                @if ($errors->has('no_hp'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('no_hp') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('alamat') ? ' has-error' : '' }}">
+                            <label for="alamat" class="col-md-4 control-label">Alamat</label>
+                            <div class="col-md-6">
+                                <input id="alamat" type="text" class="form-control" name="alamat" value="{{ $data->alamat }}" required>
+                                @if ($errors->has('alamat'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('alamat') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-                        <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }} " style="margin-bottom: 20px;">
+                        <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }} " style="margin-bottom: 20px;" hidden>
                             <label for="user_id" class="col-md-4 control-label">User Login</label>
                             <div class="col-md-6">
                             <select class="form-control" name="user_id" required="">
@@ -104,13 +108,13 @@ $(document).ready(function() {
                             </select>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="submit">
-                                    Ubah
+                        <button type="submit" class="btn btn-warning btn-sm" id="submit">
+                                    Simpan
                         </button>
-                        <button type="reset" class="btn btn-danger">
+                        <button type="reset" class="btn btn-danger btn-sm">
                                     Reset
                         </button>
-                        <a href="{{route('anggota.index')}}" class="btn btn-light pull-right">Back</a>
+                        <a href="{{route('anggota.index')}}" class="btn btn-danger btn-sm pull-right">Kembali</a>
                     </div>
                   </div>
                 </div>

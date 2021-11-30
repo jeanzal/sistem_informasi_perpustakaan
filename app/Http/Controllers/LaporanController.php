@@ -15,6 +15,7 @@ use DB;
 use Excel;
 use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
+use DateTime;
 
 class LaporanController extends Controller
 {
@@ -74,7 +75,7 @@ class LaporanController extends Controller
         });
 
          $datasheet = array();
-         $datasheet[0]  =   array("NO", "JUDUL", "ISBN", "PENGARANG",  "PENERBIT","TAHUN TERBIT","JUMLAH BUKU", "LOKASI");
+         $datasheet[0]  =   array("NO", "JUDUL BUKU", "NAMA PENULIS",  "TAHUN TERBIT", "JUMLAH BUKU");
          $i=1;
 
         foreach ($datas as $data) {
@@ -82,12 +83,9 @@ class LaporanController extends Controller
            // $sheet->appendrow($data);
           $datasheet[$i] = array($i,
                         $data['judul'],
-                        $data['isbn'],
                         $data['pengarang'],
-                        $data['penerbit'],
                         $data['tahun_terbit'],
-                        $data['jumlah_buku'],
-                        $data['lokasi']
+                        $data['jumlah_buku']
                     );
           
           $i++;
@@ -182,20 +180,42 @@ public function transaksiExcel(Request $request)
         });
 
          $datasheet = array();
-         $datasheet[0]  =   array("NO", "KODE TRANSAKSI", "BUKU", "PEMINJAM",  "TGL PINJAM","TGL KEMBALI","STATUS", "KET");
+         $datasheet[0]  =   array("NO", "KODE TRANSAKSI", "JUDUL BUKU", "NAMA PEMINJAM",  "TGL PEMINJAMAN", "TGL PENGEMBALIAN", "DENDA", "STATUS");
          $i=1;
 
         foreach ($datas as $data) {
+            $pin = $data->tgl_pinjam;
+            $kem = $data->tgl_kembali;
+            $htg1 = new DateTime($pin);
+            $htg2 = new DateTime($kem);
+            $interval = date_diff($htg1,$htg2);
+            $days = $interval->format('%a');
+            $bayar_denda = 0;
+            
+            if($data->status == 'kembali'){
+                if($days > 7){
+                    $perdenda = 1000;
+                    $lama = $days - 30;
+                    $denda = $lama - 7;
+                    $bayar_denda = 'Terlambat ' .$denda. ' hari = Rp ' . $denda * $perdenda;
+                }else{
+                    $bayar_denda = "Tidak ada denda";
+                }
+            }else{
+                $bayar_denda = "Belum dikembalikan";
+            }
+
+            
 
            // $sheet->appendrow($data);
           $datasheet[$i] = array($i,
                         $data['kode_transaksi'],
-                        $data->buku->judul,
+                        $data->buku->judul_buku,
                         $data->anggota->nama,
                         date('d/m/y', strtotime($data['tgl_pinjam'])),
                         date('d/m/y', strtotime($data['tgl_kembali'])),
-                        $data['status'],
-                        $data['ket']
+                        $bayar_denda,
+                        $data['status']
                     );
           
           $i++;

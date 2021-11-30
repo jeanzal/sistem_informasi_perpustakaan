@@ -21,13 +21,13 @@
                             </div>
                         </div>
                          <div class="form-group{{ $errors->has('tgl_pinjam') ? ' has-error' : '' }}">
-                            <label for="tgl_pinjam" class="col-md-4 control-label">Tanggal Pinjam</label>
+                            <label for="tgl_pinjam" class="col-md-4 control-label">Tanggal Peminjaman</label>
                             <div class="col-md-3">
                                 <input id="tgl_pinjam" type="date" class="form-control" name="tgl_pinjam" value="{{ date('Y-m-d', strtotime($data->tgl_pinjam)) }}" readonly="">
                             </div>
                         </div>
                          <div class="form-group{{ $errors->has('tgl_kembali') ? ' has-error' : '' }}">
-                            <label for="tgl_kembali" class="col-md-4 control-label">Tanggal Kembali</label>
+                            <label for="tgl_kembali" class="col-md-4 control-label">Tanggal Pengembalian</label>
                             <div class="col-md-3">
                                 <input id="tgl_kembali" type="date"  class="form-control" name="tgl_kembali" value="{{ date('Y-m-d', strtotime($data->tgl_kembali)) }}" readonly="">
                             </div>
@@ -35,15 +35,15 @@
 
 
                         <div class="form-group">
-                            <label for="anggota_id" class="col-md-4 control-label">Buku</label>
+                            <label for="anggota_id" class="col-md-4 control-label">Judul Buku</label>
                             <div class="col-md-6">
-                                <input id="buku" type="text" class="form-control" readonly="" value="{{$data->buku->judul}}">
+                                <input id="buku" type="text" class="form-control" readonly="" value="{{$data->buku->judul_buku}}">
 
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="anggota_id" class="col-md-4 control-label">Anggota</label>
+                            <label for="anggota_id" class="col-md-4 control-label">Nama Peminjam</label>
                             <div class="col-md-6">
                                 <input id="anggota_nama" type="text" class="form-control" readonly="" value="{{$data->anggota->nama}}">
 
@@ -61,14 +61,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('ket') ? ' has-error' : '' }}">
-                            <label for="ket" class="col-md-4 control-label">Keterangan</label>
-                            <div class="col-md-6">
-                                <input id="ket" type="text" class="form-control" name="ket" value="{{ $data->ket }}" readonly="">
-                            </div>
-                        </div>
-
-                        <a href="{{route('transaksi.index')}}" class="btn btn-light pull-right">Back</a>
+                        <a href="{{route('transaksi.index')}}" class="btn btn-danger btn-sm pull-right">Kembali</a>
                     </div>
                   </div>
                 </div>
