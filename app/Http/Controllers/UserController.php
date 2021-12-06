@@ -9,6 +9,7 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use DB;
 
 class UserController extends Controller
 {
@@ -45,7 +46,8 @@ class UserController extends Controller
             Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
             return redirect()->to('/');
         }
-        return view('auth.register');
+        $users = User::get();
+        return view('auth.register', compact('users'));
     }
 
     /**

@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
   <link rel="stylesheet" href="{{ asset('css/select2.css')}}">
   <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css')}}">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
   @section('css')
   @show
   <link rel="shortcut icon" href="{{asset('favicon.ico')}}" />
@@ -88,10 +90,12 @@
   <script src="{{asset('js/off-canvas.js')}}"></script>
   <script src="{{asset('js/misc.js')}}"></script>
   <script src="{{asset('js/dashboard.js')}}"></script>
+  <script src="{{asset('js/transaksi.js')}}"></script>
   <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
   <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
   <script src="{{asset('js/sweetalert2.all.js')}}"></script>
   <script src="{{asset('js/select2.min.js')}}"></script>
+  
   @include('sweetalert::alert')
   @section('js')
 

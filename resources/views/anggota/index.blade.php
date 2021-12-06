@@ -14,7 +14,7 @@
 <div class="row">
 
   <div class="col-lg-2">
-    <a href="{{ route('anggota.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Anggota</a>
+    <a href="{{ route('user.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Anggota</a>
   </div>
     <div class="col-lg-12">
                   @if (Session::has('message'))

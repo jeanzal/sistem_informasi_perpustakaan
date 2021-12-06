@@ -69,25 +69,23 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('buku_id') ? ' has-error' : '' }}">
+                        <div class="field_wrapper">
                             <label for="buku_id" class="col-md-4 control-label">Judul Buku</label>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="input-group">
-                                <input id="buku_judul" type="text" class="form-control" readonly="" required>
-                                <input id="buku_id" type="hidden" name="buku_id" value="{{ old('buku_id') }}" required readonly="">
+                                <select class="form-control" name="buku_id[]" required="">
+                                  @foreach($bukus as $data)
+                                    <option value="{{$data->id}}">{{$data->judul_buku}}</option>
+                                  @endforeach
+                                </select>
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-info btn-secondary" data-toggle="modal" data-target="#myModal"><b>Cari Buku</b> <span class="fa fa-search"></span></button>
+                                    <a class="btn btn-success" href="javascript:void(0);" id="add_button" title="Tambah Buku">+ add</a>
                                 </span>
                                 </div>
-                                @if ($errors->has('buku_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('buku_id') }}</strong>
-                                    </span>
-                                @endif
                                  
                             </div>
-                        </div>
+                        </div><br>
+                      
                         
 
                         @if(Auth::user()->level == 'admin')
@@ -137,51 +135,8 @@
                 </div>
               </div>
             </div>
-
-</div>
 </form>
 
-
-  <!-- Modal -->
-        <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
-  <div class="modal-dialog modal-lg" role="document" >
-    <div class="modal-content" style="background: #fff;">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cari Buku</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-                        <table id="lookup" class="table table-bordered table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Judul Buku</th>
-                                    <th>Nama Penulis</th>
-                                    <th>Tahun Terbit</th>
-                                    <th>Jumlah Buku</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($bukus as $data)
-                                <tr class="pilih" data-buku_id="<?php echo $data->id; ?>" data-buku_judul="<?php echo $data->judul_buku; ?>" >
-                                    <td>@if($data->gambar_buku)
-                            <img src="{{url('images/buku/'. $data->gambar_buku)}}" alt="image" style="margin-right: 10px;" />
-                          @else
-                            <img src="{{url('images/buku/default.png')}}" alt="image" style="margin-right: 10px;" />
-                          @endif
-                          {{$data->judul_buku}}</td>
-                                    <td>{{$data->nama_penulis}}</td>
-                                    <td>{{$data->tahun_terbit}}</td>
-                                    <td>{{$data->jumlah_buku}}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>  
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
   <!-- Modal -->
@@ -255,4 +210,5 @@
                 </div>
             </div>
         </div>
+
 @endsection
