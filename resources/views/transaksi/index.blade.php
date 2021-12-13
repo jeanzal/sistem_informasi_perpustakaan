@@ -38,7 +38,7 @@
                           <th>Judul Buku</th>
                           <th>Nama Peminjam</th>
                           <th>Tgl Peminjaman</th>
-                          <th>Tgl Pengembalian</th>
+                          <th>Tgl Harus Kembali | Tgl Dikembalikan</th>
                           <th>Denda</th>
                           <th>Status</th>
                           <th>Action</th>
@@ -49,7 +49,7 @@
                       @foreach($datas as $data)
                          @php
                           $pin = $data->tgl_pinjam;
-                          $kem = $data->tgl_kembali;
+                          $kem = $data->tgl_dikembali;
                           $htg1 = new DateTime($pin);
                           $htg2 = new DateTime($kem);
                           $interval = date_diff($htg1,$htg2);
@@ -74,14 +74,18 @@
                            {{date('d/m/y', strtotime($data->tgl_pinjam))}}
                           </td>
                           <td>
-                            {{date('d/m/y', strtotime($data->tgl_kembali))}}
+                            {{date('d-M-y', strtotime($data->tgl_kembali))}}  
+                            @if($data->status == 'kembali')
+                              <b> dikembalikan </b>
+                              {{date('d-M-y', strtotime($data->tgl_dikembali))}}
+                            @endif
                           </td>
                           <td>
                           @php
                             if($data->status == 'kembali'){
                               if($days > 7){
                                 $perdenda = 1000;
-                                $lama = $days - 30;
+                                $lama = $days;
                                 $denda = $lama - 7;
                                 $bayar_denda = $denda * $perdenda;
                                 echo('Terlambat ' . $denda . ' hari = Rp ' . $bayar_denda);
@@ -110,11 +114,11 @@
                           </button>
                           <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 30px, 0px);">
                           @if($data->status == 'pinjam')
-                          <form action="{{ route('transaksi.update', $data->id) }}" method="post" enctype="multipart/form-data">
+                          <form action="" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('put') }}
-                            <button class="dropdown-item" onclick="return confirm('Anda yakin data ini sudah kembali?')"> Sudah Kembali
-                            </button>
+                            <a class="dropdown-item" href="{{ route('transaksi.edit', $data->id) }}"> Sudah Kembali
+                          </a>
                           </form>
                           @endif
                             <form action="{{ route('transaksi.destroy', $data->id) }}" class="pull-left"  method="post">

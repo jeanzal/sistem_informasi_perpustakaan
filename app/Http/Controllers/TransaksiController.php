@@ -94,6 +94,7 @@ class TransaksiController extends Controller
                 'kode_transaksi' => $request->get('kode_transaksi'),
                 'tgl_pinjam' => $request->get('tgl_pinjam'),
                 'tgl_kembali' => $request->get('tgl_kembali'),
+                'tgl_dikembali' => $request->get('tgl_kembali'),
                 'buku_id' => $request->get('buku_id'),
                 'anggota_id' => $request->get('anggota_id'),
                 'denda' => $request->get('denda'),
@@ -142,11 +143,11 @@ class TransaksiController extends Controller
         $data = Transaksi::findOrFail($id);
 
         if((Auth::user()->level == 'user') && (Auth::user()->anggota->id != $data->anggota_id)) {
-                Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
-                return redirect()->to('/');
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
+            return redirect()->to('/'); 
         }
 
-        return view('buku.edit', compact('data'));
+        return view('transaksi.edit', compact('data'));
     }
 
     /**
@@ -161,6 +162,7 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::find($id);
 
         $transaksi->update([
+                'tgl_dikembali' => $request->get('tgl_dikembali'),
                 'status' => 'kembali'
                 ]);
 

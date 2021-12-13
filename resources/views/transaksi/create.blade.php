@@ -73,14 +73,11 @@
                             <label for="buku_id" class="col-md-4 control-label">Judul Buku</label>
                             <div class="col-md-5">
                                 <div class="input-group">
-                                <select class="form-control" name="buku_id[]" required="">
+                                <select class="form-control" name="buku_id" required="">
                                   @foreach($bukus as $data)
                                     <option value="{{$data->id}}">{{$data->judul_buku}}</option>
                                   @endforeach
                                 </select>
-                                <span class="input-group-btn">
-                                    <a class="btn btn-success" href="javascript:void(0);" id="add_button" title="Tambah Buku">+ add</a>
-                                </span>
                                 </div>
                                  
                             </div>

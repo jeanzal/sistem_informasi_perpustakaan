@@ -22,8 +22,9 @@ class CreateTransaksisTable extends Migration
             $table->foreign('buku_id')->references('id')->on('buku')->onDelete('cascade');
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali');
+            $table->date('tgl_dikembali');
             $table->enum('status', ['pinjam', 'kembali']);
-            $table->text('ket')->nullable();
+            $table->text('denda')->nullable();
             $table->timestamps();        
         });
     }

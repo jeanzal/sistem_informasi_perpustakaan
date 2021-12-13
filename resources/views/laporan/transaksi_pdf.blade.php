@@ -92,7 +92,7 @@
                           <td>Judul Buku</td>
                           <td>Nama Peminjam</td>
                           <td>Tgl Peminjaman</td>
-                          <td>Tgl Pengembalian</td>
+                          <td>Tgl Harus Kembali / Tgl dikembalikan</td>
                           <td>Denda</td>
                           <td>Status</td>
                         </tr>
@@ -100,7 +100,7 @@
                       @foreach($datas as $data)
                         @php
                           $pin = $data->tgl_pinjam;
-                          $kem = $data->tgl_kembali;
+                          $kem = $data->tgl_dikembali;
                           $htg1 = new DateTime($pin);
                           $htg2 = new DateTime($kem);
                           $interval = date_diff($htg1,$htg2);
@@ -124,13 +124,17 @@
                           </td>
                           <td>
                             {{date('d/m/y', strtotime($data->tgl_kembali))}}
+                            @if($data->status == 'kembali')
+                              <b> dikembalikan </b>
+                              {{date('d-M-y', strtotime($data->tgl_dikembali))}}
+                            @endif
                           </td>
                           <td>
                           @php
                             if($data->status == 'kembali'){
                               if($days > 7){
                                 $perdenda = 1000;
-                                $lama = $days - 30;
+                                $lama = $days;
                                 $denda = $lama - 7;
                                 $bayar_denda = $denda * $perdenda;
                                 echo('Terlambat ' . $denda . ' hari = Rp ' . $bayar_denda);

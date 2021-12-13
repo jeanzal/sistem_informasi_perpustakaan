@@ -15,15 +15,11 @@ class CreateBukusTable extends Migration
     {
         Schema::create('buku', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('judul');
-            $table->string('isbn', 25)->nullable();
-            $table->string('pengarang')->nullable();
-            $table->string('penerbit')->nullable();
+            $table->string('judul_buku');
+            $table->string('nama_penulis')->nullable();
             $table->integer('tahun_terbit')->nullable();
             $table->integer('jumlah_buku');
-            $table->text('deskripsi')->nullable();
-            $table->enum('lokasi', ['rak1', 'rak2', 'rak3'])->nullable();
-            $table->string('cover')->nullable();
+            $table->string('gambar_buku')->nullable();
             $table->timestamps();
         });
     }

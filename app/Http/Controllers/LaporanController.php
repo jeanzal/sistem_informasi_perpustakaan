@@ -185,7 +185,7 @@ public function transaksiExcel(Request $request)
 
         foreach ($datas as $data) {
             $pin = $data->tgl_pinjam;
-            $kem = $data->tgl_kembali;
+            $kem = $data->tgl_dikembali;
             $htg1 = new DateTime($pin);
             $htg2 = new DateTime($kem);
             $interval = date_diff($htg1,$htg2);
@@ -193,9 +193,10 @@ public function transaksiExcel(Request $request)
             $bayar_denda = 0;
             
             if($data->status == 'kembali'){
+                $tgl_dikbl = date('d/m/y', strtotime($data['tgl_dikembali']));
                 if($days > 7){
                     $perdenda = 1000;
-                    $lama = $days - 30;
+                    $lama = $days;
                     $denda = $lama - 7;
                     $bayar_denda = 'Terlambat ' .$denda. ' hari = Rp ' . $denda * $perdenda;
                 }else{
@@ -204,23 +205,19 @@ public function transaksiExcel(Request $request)
             }else{
                 $bayar_denda = "Belum dikembalikan";
             }
-
-            
-
            // $sheet->appendrow($data);
           $datasheet[$i] = array($i,
                         $data['kode_transaksi'],
                         $data->buku->judul_buku,
                         $data->anggota->nama,
                         date('d/m/y', strtotime($data['tgl_pinjam'])),
-                        date('d/m/y', strtotime($data['tgl_kembali'])),
+                        date('d/m/y', strtotime($data['tgl_kembali'])). $tgl_dikbl,
                         $bayar_denda,
                         $data['status']
                     );
           
           $i++;
         }
-
         $sheet->fromArray($datasheet);
     });
 
