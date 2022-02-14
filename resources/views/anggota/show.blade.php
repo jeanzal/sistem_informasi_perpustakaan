@@ -38,13 +38,13 @@ $(document).ready(function() {
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('npm') ? ' has-error' : '' }}">
-                            <label for="npm" class="col-md-4 control-label">NIM</label>
+                        <div class="form-group{{ $errors->has('nim') ? ' has-error' : '' }}">
+                            <label for="nim" class="col-md-4 control-label">NIM</label>
                             <div class="col-md-6">
-                                <input id="npm" type="number" class="form-control" name="npm" value="{{ $data->npm }}" maxlength="8" readonly>
-                                @if ($errors->has('npm'))
+                                <input id="nim" type="number" class="form-control" name="nim" value="{{ $data->nim }}" maxlength="8" readonly>
+                                @if ($errors->has('nim'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('npm') }}</strong>
+                                        <strong>{{ $errors->first('nim') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -60,20 +60,20 @@ $(document).ready(function() {
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('prodi') ? ' has-error' : '' }}">
-                            <label for="prodi" class="col-md-4 control-label">Jurusan</label>
+                        <div class="form-group{{ $errors->has('jurusan') ? ' has-error' : '' }}">
+                            <label for="jurusan" class="col-md-4 control-label">Jurusan</label>
                             <div class="col-md-6">
-                            <select class="form-control" name="prodi" required="" disabled="">
+                            <select class="form-control" name="jurusan" required="" disabled="">
                                 <option value=""></option>
-                                <option value="TI" {{$data->prodi === "TI" ? "selected" : ""}} >Teknik Informatika</option>
-                                <option value="TS" {{$data->prodi === "TS" ? "selected" : ""}}>Teknik Sipil</option>
-                                <option value="EM" {{$data->prodi === "EM" ? "selected" : ""}}>Ekonomi Manajemen</option>
-                                <option value="FR" {{$data->prodi === "FR" ? "selected" : ""}}>Farmasi</option>
-                                <option value="MG" {{$data->prodi === "MG" ? "selected" : ""}}>Musik Gereja</option>
-                                <option value="TKK" {{$data->prodi === "TKK" ? "selected" : ""}}>Teologi Konseling Kristen</option>
-                                <option value="PAK" {{$data->prodi === "PAK" ? "selected" : ""}}>Pendidikan Agama Kristen</option>
-                                <option value="AK" {{$data->prodi === "AK" ? "selected" : ""}}>Akuntansi</option>
-                                <option value="FIS" {{$data->prodi === "FIS" ? "selected" : ""}}>Fisika</option>
+                                <option value="TI" {{$data->jurusan === "TI" ? "selected" : ""}} >Teknik Informatika</option>
+                                <option value="TS" {{$data->jurusan === "TS" ? "selected" : ""}}>Teknik Sipil</option>
+                                <option value="EM" {{$data->jurusan === "EM" ? "selected" : ""}}>Ekonomi Manajemen</option>
+                                <option value="FR" {{$data->jurusan === "FR" ? "selected" : ""}}>Farmasi</option>
+                                <option value="MG" {{$data->jurusan === "MG" ? "selected" : ""}}>Musik Gereja</option>
+                                <option value="TKK" {{$data->jurusan === "TKK" ? "selected" : ""}}>Teologi Konseling Kristen</option>
+                                <option value="PAK" {{$data->jurusan === "PAK" ? "selected" : ""}}>Pendidikan Agama Kristen</option>
+                                <option value="AK" {{$data->jurusan === "AK" ? "selected" : ""}}>Akuntansi</option>
+                                <option value="FIS" {{$data->jurusan === "FIS" ? "selected" : ""}}>Fisika</option>
                                 <option value=""></option>
                             </select>
                             </div>

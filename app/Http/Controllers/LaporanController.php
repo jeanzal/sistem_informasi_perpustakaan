@@ -82,8 +82,8 @@ class LaporanController extends Controller
 
            // $sheet->appendrow($data);
           $datasheet[$i] = array($i,
-                        $data['judul'],
-                        $data['pengarang'],
+                        $data['judul_buku'],
+                        $data['nama_penulis'],
                         $data['tahun_terbit'],
                         $data['jumlah_buku']
                     );
@@ -211,7 +211,7 @@ public function transaksiExcel(Request $request)
                         $data->buku->judul_buku,
                         $data->anggota->nama,
                         date('d/m/y', strtotime($data['tgl_pinjam'])),
-                        date('d/m/y', strtotime($data['tgl_kembali'])). $tgl_dikbl,
+                        date('d/m/y', strtotime($data['tgl_kembali'])).' | '. $tgl_dikbl,
                         $bayar_denda,
                         $data['status']
                     );

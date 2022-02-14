@@ -76,7 +76,7 @@
                             {{$data->judul_buku}}
                           </td>
                           <td>
-                            {{$data->pengarang}}
+                            {{$data->nama_penulis}}
                           </td>
                           <td>
                             {{$data->tahun_terbit}}

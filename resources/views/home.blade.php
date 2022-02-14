@@ -158,11 +158,10 @@
                           @endif
                           </td>
                           <td>
-                          <form action="{{ route('transaksi.update', $data->id) }}" method="post" enctype="multipart/form-data">
+                          <form action="" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('put') }}
-                            <button class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin data ini sudah kembali?')">Dikembalikan ?
-                            </button>
+                            <a href="{{ route('transaksi.edit', $data->id) }}" class="btn btn-sm btn-danger" >Dikembalikan ?</a>   
                           </form>
                           
                           </td>
